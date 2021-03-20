@@ -1,0 +1,132 @@
+{% load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employees</title>
+    <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+    body {
+    overflow-y: scroll;
+    }
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    body::-webkit-scrollbar {
+    display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    body {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    }
+    }
+
+
+
+
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+{% include 'screens/homepage_assets/navbar.html' %}
+
+<div class="container">
+    <ol class="breadcrumb my-4">
+        <li class="breadcrumb-item active">All Employees</li>
+    </ol>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>Personal Info.</th>
+            <th>Edu Info.</th>
+            <th>Work Expr.</th>
+            <th>Skills</th>
+            <th>Quiz Result</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for Employee in Employees%}
+        <tr>
+            <td>
+                <h6>Name</h6> {{Employee.Name}}
+                <br><br>
+                <h6>Email</h6> {{Employee.Email}}
+                <br><br>
+                <h6>Phone</h6> {{Employee.Phone}}
+                <br><br>
+                <h6>Lives in</h6> {{Employee.Country}}
+            </td>
+            <td>
+                <h6>School Name</h6> {{Employee.School_Name}}
+                <br><br>
+                <h6>University Name</h6> {{Employee.University_Name}}
+                <br><br>
+                <h6>Graduation year</h6> {{Employee.Graduation_Date}}
+                <br><br>
+            </td>
+
+            <td>
+                <h6>Last Work</h6> {{Employee.Job_Title}} in {{Employee.Company}}
+                <br><br>
+                <h6>From</h6>{{Employee.Start_Date_Work}}
+                <br><br>
+                <h6>To</h6> {{Employee.End_Date_Work}}
+                <br><br>
+            </td>
+            <td>
+                <h6>Skills</h6>
+                {{Employee.Skills_1}}
+                <br><br>
+                {{Employee.Skills_2}}
+                <br><br>
+                {{Employee.Skills_3}}
+                <br><br>
+                {{Employee.Skills_4}}
+                <br><br>
+                {{Employee.Skills_5}}
+                <br><br>
+
+            </td>
+
+            <td>
+                {% for quizResult in quizResults%}
+                {%if quizResult.user_email == Employee.Email %}
+                <b>Computer Skills</b>
+
+                {%if quizResult.question_1_cs == 'Recog screen' %}
+                <p>Question 1: {{quizResult.question_1_cs}}
+                <p style="color:green">Correct</p></p>
+                {%else%}
+                <p>Question 1: {{quizResult.question_1_cs}}
+                <p style="color:red">Wrong</p></p>
+                {%endif%}
+
+                {%if quizResult.question_2_cs == 'Crtl + C then Crtl+V' %}
+                <p>Question 2: {{quizResult.question_2_cs}}
+                <p style="color:green">Correct</p></p>
+                {%else%}
+                <p>Question 2: {{quizResult.question_2_cs}}
+                <p style="color:red">Wrong</p></p>
+
+                {%endif%}
+                {% endif %}
+                {%endfor%}
+            </td>
+
+        </tr>
+        {%endfor%}
+        </tbody>
+    </table>
+
+    <a href="/admin/Apps/applicantcv/export/">Export all CVs</a>
+</div>
+</body>
+</html>
