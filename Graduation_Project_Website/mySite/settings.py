@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'accounts',
     'widget_tweaks',
     'import_export',
+    'django_extensions',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -102,17 +103,10 @@ WSGI_APPLICATION = 'mySite.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': 'HR_SYSTEM',
-        # 'USER': 'postgres',
-        # 'PASSWORD': 'hoppas98',
-        # 'HOST': 'localhost',
-        # 'PORT': '5432',
-
         'ENGINE': 'djongo',
         'NAME': 'HR_SYSTEM',
         'CLIENT': {
-            'host':'mongodb+srv://hoppas98:hoppas98@cluster0.rr4of.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+            'host': 'mongodb+srv://hoppas98:hoppas98@cluster0.rr4of.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
             'username': 'hoppas98',
             'password': 'hoppas98',
         },
@@ -155,13 +149,16 @@ USE_L10N = True
 
 USE_TZ = True
 
+GRAPH_MODELS = {
+    'all_applicants': True,
+    'group_models': True,
+}
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
-
-
 
 LOGOUT_REDIRECT_URL = 'index'
 LOGIN_REDIRECT_URL = 'index'

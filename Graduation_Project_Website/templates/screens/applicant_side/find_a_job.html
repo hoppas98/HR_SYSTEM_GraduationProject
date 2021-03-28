@@ -4,7 +4,17 @@
     <meta charset="UTF-8">
     <title>Find a Job</title>
     <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+<style>
+a.Next:link, a.Next:visited {
 
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+a.Next:hover {font-size:150%; text-decoration: none; color:green;}
+</style>
 
 </head>
 
@@ -77,55 +87,10 @@ font-size:50%;
 
             <div style="text-align:left; margin:2%;">
                 <h5>READY?</h5>
-                <a href="{%url 'new_cv'%}">Next</a>
+                <a href="{%url 'new_cv'%}" class="Next">Next</a>
             </div>
         </div>
     </div>
 </div>
 </body>
 </html>
-
-<!--    <h5>Procedures</h5>-->
-
-<!--    <div class="center">-->
-<!--        <ul class="list-group" style="text-align:left;">-->
-<!--            <li class="list-group-item list-group-item-success">-->
-<!--                <p>-->
-<!--                    1st: You have to fill your own CV carefully because you will be tested on it and upload a hard-copy-->
-<!--                    of your CV as PDF to let the company check it.-->
-<!--                </p>-->
-<!--            </li>-->
-<!--            <li class="list-group-item list-group-item-info">-->
-<!--                <p>-->
-<!--                    2nd: You will start your interview with our chatbot that will ask you everything written in the CV.-->
-<!--                </p>-->
-<!--            </li>-->
-
-<!--            <li class="list-group-item list-group-item-warning">-->
-<!--                <p>-->
-<!--                    3th: Wait until you receive an email from a company that wants to make an appointment with you.-->
-<!--                </p>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </div>-->
-
-<!--    <h5>Rules/Instructions</h5>-->
-
-<!--    <div class="center">-->
-<!--        <ul class="list-group" style="text-align:left; ">-->
-<!--            <li class="list-group-item list-group-item-success">-->
-<!--                <p>-->
-<!--                    1st: Open your camera.-->
-<!--                </p>-->
-<!--            </li>-->
-<!--            <li class="list-group-item list-group-item-info">-->
-<!--                <p>-->
-<!--                    2nd: Don't use your mobile during your exam or any other tab during your exam.-->
-<!--                </p>-->
-<!--            </li>-->
-<!--        </ul>-->
-
-<!--    </div>-->
-
-<!--</div>-->
-

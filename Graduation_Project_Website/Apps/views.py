@@ -59,8 +59,8 @@ def add_job(request):
     return render(request, 'screens/company_side/add_job.html')
 
 
-def company_side(request):
-    return render(request, 'screens/homepage_assets/homepage_company.html')
+# def company_side(request):
+#     return render(request, 'screens/homepage_assets/homepage_company.html')
 
 
 def chatbot_quiz(request):

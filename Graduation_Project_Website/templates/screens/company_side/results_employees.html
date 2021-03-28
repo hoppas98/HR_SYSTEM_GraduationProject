@@ -23,14 +23,15 @@
     }
     }
 
+a.Export:link, a.Export:visited {
 
-
-
-
-
-
-
-
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+a.Export:hover {font-size:150%; text-decoration: none; color:green;}
 
     </style>
 </head>
@@ -41,6 +42,8 @@
     <ol class="breadcrumb my-4">
         <li class="breadcrumb-item active">All Employees</li>
     </ol>
+    <a href="/admin/Apps/applicantcv/export/" class="Export">Export</a>
+
     <table class="table">
         <thead class="thead-dark">
         <tr>
@@ -99,22 +102,10 @@
             <td>
                 {% for quizResult in quizResults%}
                 {%if quizResult.user_email == Employee.Email %}
-                <b>Computer Skills</b>
-
-                {%if quizResult.question_1_cs == 'Recog screen' %}
-                <p>Question 1: {{quizResult.question_1_cs}}
-                <p style="color:green">Correct</p></p>
+                {%if quizResult.Teamwork_skill == 'true'%}
+                <p style="color:green">Team worker</p>
                 {%else%}
-                <p>Question 1: {{quizResult.question_1_cs}}
-                <p style="color:red">Wrong</p></p>
-                {%endif%}
-
-                {%if quizResult.question_2_cs == 'Crtl + C then Crtl+V' %}
-                <p>Question 2: {{quizResult.question_2_cs}}
-                <p style="color:green">Correct</p></p>
-                {%else%}
-                <p>Question 2: {{quizResult.question_2_cs}}
-                <p style="color:red">Wrong</p></p>
+                <p style="color:red">Team worker</p>
 
                 {%endif%}
                 {% endif %}
@@ -126,7 +117,6 @@
         </tbody>
     </table>
 
-    <a href="/admin/Apps/applicantcv/export/">Export all CVs</a>
 </div>
 </body>
 </html>
