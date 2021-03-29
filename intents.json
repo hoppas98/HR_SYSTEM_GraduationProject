@@ -1,0 +1,358 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hi",
+        "Hey",
+        "How are you",
+        "Is anyone there?",
+        "Hello",
+        "Good day"
+      ],
+      "responses": [
+        "Hello, what is your name?",
+        "Hi there, what's your name?",
+        "Hi there, what's your name?"
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": ["Bye", "See you later", "Goodbye"],
+      "responses": [
+        "See you later, thanks for visiting",
+        "Have a nice day",
+        "Bye! Come back again soon."
+      ]
+    },
+    {
+      "tag": "thanks",
+      "patterns": ["Thanks", "Thank you", "That's helpful", "Thank's a lot!"],
+      "responses": ["Happy to help!", "Any time!", "My pleasure"]
+    },
+    {
+      "tag": "payments",
+      "patterns": [
+        "Do you take credit cards?",
+        "Do you accept Mastercard?",
+        "Can I pay with Paypal?",
+        "Are you cash only?"
+      ],
+      "responses": [
+        "We accept VISA, Mastercard and Paypal",
+        "We accept most major credit cards, and Paypal"
+      ]
+    },
+    {
+      "tag": "delivery",
+      "patterns": [
+        "How long does delivery take?",
+        "How long does shipping take?",
+        "When do I get my delivery?"
+      ],
+      "responses": [
+        "Delivery takes 2-4 days",
+        "Shipping takes 2-4 days"
+      ]
+    },
+    {
+      "tag": "funny",
+      "patterns": [
+        "Tell me a joke!",
+        "Tell me something funny!",
+        "Do you know a joke?"
+      ],
+      "responses": [
+        "Why did the hipster burn his mouth? He drank the coffee before it was cool.",
+        "What did the buffalo say when his son left for college? Bison."
+      ]
+    },
+    {
+      "tag": "question",
+      "patterns": [
+        "could I make a request?",
+        "can I ask a question?",
+        "can I tell you something?"
+      ],
+      "responses": [
+        "yes , for sure",
+        "I am all ears"
+      ]
+    },
+    {
+      "tag": "question2",
+      "patterns": [
+        "my name is",
+        "It is ",
+        "It's"
+      ],
+      "responses": [
+        "where do you work now?",
+        "what is your work now?"
+      ]
+    },
+    {
+      "tag": "question3",
+      "patterns": [
+        "I work for",
+        "I work at ",
+        "My work is "
+
+      ],
+      "responses": [
+        "Why are you leaving your current job? "
+
+      ]
+    },
+    {
+      "tag": "question4",
+      "patterns": [
+        "I didn't work",
+        "I have no work ",
+        "I have no company"
+      ],
+      "responses": [
+        "So, that's your first job right",
+        "Oh , that's your first time then"
+      ]
+    },
+    {
+      "tag": "question5",
+      "patterns": [
+        "yes it is",
+        "yup",
+        "yes it is my first"
+      ],
+      "responses": [
+        "It wont be the the last, so do you think you are a team player?",
+        "It wont be the the last,Firstly are you a team player?"
+      ]
+    },
+    {
+      "tag": "question6",
+      "patterns": [
+        "I am a team player",
+        "yes I am"
+      ],
+      "responses": [
+        "why would you consider your self that?"
+
+      ]
+    },
+    {
+      "tag": "question7",
+      "patterns": [
+        "I got fired",
+        "The company didn't want me"
+      ],
+      "responses": [
+        "for what??"
+
+      ]
+    },
+    {
+      "tag": "question8",
+      "patterns": [
+        "I wanted to change my work style ",
+        "I wanted to achieve more at your company",
+        "I wanted to "
+      ],
+      "responses": [
+        "So there was nothing wrong with your old work right ?"
+
+      ]
+    },
+    {
+      "tag": "question9",
+      "patterns": [
+        "right",
+        "offcourse",
+        "offcourse not "
+      ],
+      "responses": [
+        "Why should we hire you?  "
+
+      ]
+    },
+     {
+      "tag": "question10",
+      "patterns": [
+        "I have all the requisite qualifications and skills",
+        " I can do the work that",
+        " I can do the work that",
+        "I am confident about"
+
+
+
+      ],
+      "responses": [
+        "Do you know anyone who works for us?"
+
+      ]
+    },
+     {
+      "tag": "question11",
+      "patterns": [
+        "I’m good friends with",
+       "I am a friend of"
+
+      ],
+      "responses": [
+        "What are your salary expectations?"
+
+      ]
+    },
+     {
+      "tag": "question12",
+      "patterns": [
+        "My salary expectations are in line with the current industry standards",
+        "once my responsibilities are clear I can state an exact figure.",
+        "Right now, I would like to know what my potential Manager expects from this job position ",
+        "I am sure your company is already paying a specific package",
+        "I would like to understand this job position and the expected responsibilities ",
+        "What I believe is that the job position will be a huge career upgrade for me",
+        "I think this is not the right time for me to answer the question"
+      ],
+      "responses": [
+        "Do you have a good work ethic? "
+
+      ]
+    },
+     {
+      "tag": "question13",
+      "patterns": [
+        "I am quite disciplined as a person",
+        "I believe in doing my work in a planned and organized manner",
+        "In my years of professional experience",
+        "I get long well with people which helps in maintaining a good work environment."
+      ],
+      "responses": [
+        "How do you deal with feedback and criticism?"
+
+      ]
+    },
+     {
+      "tag": "question14",
+      "patterns": [
+        "I have learnt that it is best to take criticism positively.",
+        "Feedback and criticism help one to look at things from a different perspective",
+        "It ultimately helps one gain useful insights into one's strengths and weaknesses."
+      ],
+      "responses": [
+        "Why do you want to leave your current job?"
+
+      ]
+    },
+     {
+      "tag": "question15",
+      "patterns": [
+        " I have been working with a great team ",
+        "after working with the organization for more than",
+        "I believe I have exhausted all the challenges",
+        "I am now looking forward to more challenges ",
+        " believe the job role offered by your company is the perfect scope"
+      ],
+      "responses": [
+        "Tell me something about yourself in brief"
+
+      ]
+    },
+     {
+      "tag": "question16",
+      "patterns": [
+        "I am from ",
+        "My father is a ",
+        "My younger sister",
+        "My older sister ",
+        "My younger brother ",
+        "My older brother ",
+        "I have always been a fast learner",
+        "I am a confident, hardworking"
+      ],
+      "responses": [
+        "Describe who you are or Tell me about your background"
+
+      ]
+    },
+     {
+      "tag": "question17",
+      "patterns": [
+        "I’m a management consultant",
+        "I have gained across multiple",
+        "I am responsible for "
+      ],
+      "responses": [
+        "What are your strengths and weaknesses?"
+
+      ]
+    },
+     {
+      "tag": "question18",
+      "patterns": [
+        "I have several strengths",
+        "I am the biggest dreamer",
+        "I am not very good at computer applications and shortcuts"
+
+
+
+      ],
+      "responses": [
+        "Do you want to complete your Masters/Post Graduation in near future? "
+
+      ]
+    },
+     {
+      "tag": "question19",
+      "patterns": [
+        "I am impatient ",
+        "I am a very shy person",
+        "My communication style can be sometimes blunt and harsh ",
+        "I struggle with maintaining a good work-life balance",
+        "My greatest weakness is "
+      ],
+      "responses": [
+        "Do you want to complete your Masters/Post Graduation in near future? "
+
+      ]
+    },
+     {
+      "tag": "question20",
+      "patterns": [
+        "I am a perfectionist",
+        "I am a perfect",
+        "perfect"
+
+      ],
+      "responses": [
+        "What are your strong points? or What are your strengths?"
+
+      ]
+    },
+     {
+      "tag": "question22",
+      "patterns": [
+        "Yes, I do",
+        "I want to yes"
+
+      ],
+      "responses": [
+        "Ask whatever you want.."
+
+      ]
+    },
+    {
+      "tag": "question21",
+      "patterns": [
+        "It was great talking to you",
+        "no"
+
+      ],
+      "responses": [
+        "that's it then "
+
+      ]
+    }
+
+
+  ]
+}
