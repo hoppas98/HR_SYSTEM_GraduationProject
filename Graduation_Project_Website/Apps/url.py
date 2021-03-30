@@ -9,6 +9,7 @@ urlpatterns = [
     path('waiting_quiz', views.waiting_quiz, name='waiting_quiz'),
     # path('homepage_company', views.company_side, name='homepage_company'),
     path('result_employees', views.getRequestedEmployees, name='result_employees'),
+    path('view_applicant_report/<user_email>/', views.view_applicant_report, name='view_applicant_report'),
     path('contact_us', views.contact_us, name='contact_us'),
     path('chatbot_quiz', views.chatbot_quiz, name='chatbot_quiz'),
     path('add_job', views.add_job, name='add_job'),

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Employees</title>
+    <title>Applicant</title>
     <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -37,6 +37,9 @@ a.Export:hover {font-size:150%; text-decoration: none; color:green;}
 
 
 
+
+
+
     </style>
 </head>
 <body>
@@ -44,62 +47,45 @@ a.Export:hover {font-size:150%; text-decoration: none; color:green;}
 
 <div class="container">
     <ol class="breadcrumb my-4">
-        <li class="breadcrumb-item active">All Employees</li>
+        <li class="breadcrumb-item active">Applicant</li>
     </ol>
-    <a href="/admin/Apps/applicantcv/export/" class="Export">Export</a>
-
     <table class="table">
         <thead class="thead-dark">
         <tr>
             <th>Personal Info.</th>
-            <th>Edu Info.</th>
-            <th>Work Expr.</th>
-            <th>Skills</th>
+            <th>Skills Mentioned</th>
             <th>Interview Result</th>
+            <th>Skills Report</th>
+            <th>Facial Emotions Report</th>
 
         </tr>
         </thead>
         <tbody>
-        {% for Employee in Employees%}
-
+        {% for Applicant in Applicants%}
+        {% if user_email == Applicant.Email%}
         <tr>
             <td>
-                <h6>Name</h6> {{Employee.Name}}
+                <h6>Name</h6> {{Applicant.Name}}
                 <br><br>
-                <h6>Email</h6> <a href="/view_applicant_report/{{Employee.Email}}/">{{Employee.Email}}</a>
+                <h6>Email</h6> {{Applicant.Email}}
                 <br><br>
-                <h6>Phone</h6> {{Employee.Phone}}
+                <h6>Phone</h6> {{Applicant.Phone}}
                 <br><br>
-                <h6>Lives in</h6> {{Employee.Country}}
-            </td>
-            <td>
-                <h6>School Name</h6> {{Employee.School_Name}}
-                <br><br>
-                <h6>University Name</h6> {{Employee.University_Name}}
-                <br><br>
-                <h6>Graduation year</h6> {{Employee.Graduation_Date}}
-                <br><br>
+                <h6>Lives in</h6> {{Applicant.Country}}
             </td>
 
-            <td>
-                <h6>Last Work</h6> {{Employee.Job_Title}} in {{Employee.Company}}
-                <br><br>
-                <h6>From</h6>{{Employee.Start_Date_Work}}
-                <br><br>
-                <h6>To</h6> {{Employee.End_Date_Work}}
-                <br><br>
-            </td>
+
             <td>
                 <h6>Skills</h6>
-                {{Employee.Skills_1}}
+                {{Applicant.Skills_1}}
                 <br><br>
-                {{Employee.Skills_2}}
+                {{Applicant.Skills_2}}
                 <br><br>
-                {{Employee.Skills_3}}
+                {{Applicant.Skills_3}}
                 <br><br>
-                {{Employee.Skills_4}}
+                {{Applicant.Skills_4}}
                 <br><br>
-                {{Employee.Skills_5}}
+                {{Applicant.Skills_5}}
                 <br><br>
 
             </td>
@@ -108,7 +94,7 @@ a.Export:hover {font-size:150%; text-decoration: none; color:green;}
                 {% for quizResult in quizResults%}
 
 
-                {%if quizResult.user_email == Employee.Email %}
+                {%if quizResult.user_email == Applicant.Email %}
                 <!--                {%if quizResult.Teamwork_skill == 'true'%}-->
                 <!--                <p style="color:green">Team worker</p>-->
                 <!--                {%else%}-->
@@ -116,17 +102,31 @@ a.Export:hover {font-size:150%; text-decoration: none; color:green;}
 
                 <B style="color:black">TEAM WORK</B>
                 <br>
-                
+
+                <b>Question 1:</b>
+                <br>
+                Describe a time when you worked well as part of a team.
+                <br>
+                <b>{{quizResult.Teamwork_Q1}}</b>
+                <br>
+                <b>Question 2:</b>
+                <br>
+                What are the advantages of teamwork?
+                <br>
+
+                <b>{{quizResult.Teamwork_Q2}}</b>
+                <br>
+                <b>Question 3:</b>
+                <br>
+                What are the soft skills that you should have to be a team worker? (e.g. X, Y, Z, etc...)
+                <br>
+
+                <b>{{quizResult.Teamwork_Q3}}</b>
+                <br>
 
                 {% for Grade in Grades%}
-                {%if Grade.0 == Employee.Email %}
-                {%if Grade.4 >= 3%}
-                <label style="color:green;">Teamworker</label>
-                ({{Grade.4}}/4)
-                {%else%}
-                <label style="color:red;">Teamworker</label>
-                ({{Grade.4}}/4)
-                {%endif%}
+                {%if Grade.0 == Applicant.Email %}
+                Score: {{Grade.4}}/4
                 {%endif%}
                 {% endfor%}
 
@@ -134,8 +134,19 @@ a.Export:hover {font-size:150%; text-decoration: none; color:green;}
                 {% endif %}
                 {%endfor%}
             </td>
-
+            <td>
+                {% for Grade in Grades%}
+                {%if Grade.0 == Applicant.Email %}
+                {%if Grade.4 >= 3%}
+                <label style="color:green;">Teamworker</label>
+                {%else%}
+                <label style="color:red;">Teamworker</label>
+                {%endif%}
+                {%endif%}
+                {% endfor%}
+            </td>
         </tr>
+        {% endif %}
         {%endfor%}
         </tbody>
     </table>

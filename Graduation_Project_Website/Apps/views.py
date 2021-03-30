@@ -150,11 +150,33 @@ def new_cv(request):
             Skills_8=skills_8,
             Skills_9=skills_9,
             pdf_cv=pdf_cv,
-
         )
         return redirect('/waiting_quiz')
 
     return render(request, 'screens/applicant_side/cv_form.html')
+
+
+def view_applicant_report(request, user_email):
+    requested_applicants = ApplicantCV.objects.all()
+    quiz_results = list(records.find())
+
+    employees_teamworker_skills = [[]]
+    for x in range(len(quiz_results)):
+        employees_teamworker_skills_Grade = 0
+        if quiz_results[x]['Teamwork_Q1'] == 'true':
+            employees_teamworker_skills_Grade += 1
+        if quiz_results[x]['Teamwork_Q2'] == 'true':
+            employees_teamworker_skills_Grade += 1
+        if quiz_results[x]['Teamwork_Q3'] == 'true':
+            employees_teamworker_skills_Grade += 2
+        employees_teamworker_skills.insert(x, (
+            [quiz_results[x]['user_email'], quiz_results[x]['Teamwork_Q1'], quiz_results[x]['Teamwork_Q2'],
+             quiz_results[x]['Teamwork_Q3'], employees_teamworker_skills_Grade]))
+
+    return render(request, 'screens/company_side/view_report.html',
+                  {'Applicants': requested_applicants, 'quizResults': quiz_results,
+                   'Grades': employees_teamworker_skills,'user_email':user_email})
+
 
 
 @login_required
@@ -162,5 +184,20 @@ def getRequestedEmployees(request):
     # requested_employees = get_object_or_404(ApplicantCV, Email='helmy123@miuegypt.edu.eg')
     requested_employees = ApplicantCV.objects.all()
     quiz_results = list(records.find())
+
+    employees_teamworker_skills = [[]]
+    for x in range(len(quiz_results)):
+        employees_teamworker_skills_Grade = 0
+        if quiz_results[x]['Teamwork_Q1'] == 'true':
+            employees_teamworker_skills_Grade += 1
+        if quiz_results[x]['Teamwork_Q2'] == 'true':
+            employees_teamworker_skills_Grade += 1
+        if quiz_results[x]['Teamwork_Q3'] == 'true':
+            employees_teamworker_skills_Grade += 2
+        employees_teamworker_skills.insert(x, (
+            [quiz_results[x]['user_email'], quiz_results[x]['Teamwork_Q1'], quiz_results[x]['Teamwork_Q2'],
+             quiz_results[x]['Teamwork_Q3'], employees_teamworker_skills_Grade]))
+
     return render(request, 'screens/company_side/results_employees.html',
-                  {'Employees': requested_employees, 'quizResults': quiz_results})
+                  {'Employees': requested_employees, 'quizResults': quiz_results,
+                   'Grades': employees_teamworker_skills})
