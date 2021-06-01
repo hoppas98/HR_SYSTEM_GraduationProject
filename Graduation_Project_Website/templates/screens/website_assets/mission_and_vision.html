@@ -15,13 +15,14 @@ body::-webkit-scrollbar {
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
+
 body {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
-  background-image: url("{% static 'images/pexels-startup-stock-photos-212286.jpg'%}" );
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+  height:20px;
 }
 
 </style>
@@ -33,32 +34,36 @@ body {
 </head>
 <body>
 {% include 'screens/homepage_assets/navbar.html' %}
+
 <div class="container">
 
     <div class="container">
+            <img src="https://www.brightview.com/sites/default/files/styles/optimized/public/2020-03/Landscape%20Job%20Interview%20Tips.jpg?itok=rS3cTbU4" class="img-fluid" alt="Responsive image">
         <div class="row" STYLE="padding:5%;">
-            <div class="col-sm-4" style="text-align:left; background-color:#ECF0F1;">
-                <h3 style="text-align:center;">MISSION</h3>
-                <div style="font-size:80%; font-family: Arial, Helvetica, sans-serif; text-align: justify; text-justify: inter-word;">
+            <div class="col-sm-4">
+                <h3>MISSION</h3>
+                <div style="font-size:80%; font-weight: bold; text-align:left;font-style: italic;">
                     <p>
-                        Our mission is help applicants to find jobs faster and easily. Also, to help companies to find
-                        qualified employees.
+                        Our mission is helping applicants to find jobs faster and easily. Also, to help companies to find
+                        qualified employees. The main target of the project is to support the social distance by
+                        making an online interview to filter the applicants and when some applicants accepted they can make
+                        the actual interview by online meeting.
                     </p>
 
                 </div>
             </div>
-            <div class="col-sm-4" style="text-align:left; margin-left:30%; background-color:#ECF0F1;">
-                <h3 style="text-align:center;">VISION</h3>
-                <div style="font-size:80%; font-family: Arial, Helvetica, sans-serif; text-align: justify; text-justify: inter-word;">
+            <div class="col-sm-4" style="text-align:left; margin-left:30%; font-style: italic;">
+                <h3>VISION</h3>
+                <div style="font-size:80%; font-weight: bold;">
                     <p>
-                        Our mission is help applicants to find jobs faster and easily. Also, to help companies to find
-                        qualified employees.
+                        Our vision is to support the online meeting after getting accepted without any physical interaction.
+                        Our goal is to make the website is global and make us as a brand to support all companies around the
+                        world and make the website is fully automated instead of HR employees by bot.
                     </p>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 </body>
 </html>

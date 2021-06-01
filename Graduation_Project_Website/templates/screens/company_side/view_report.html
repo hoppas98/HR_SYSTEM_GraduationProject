@@ -10,6 +10,9 @@
     body {
     overflow-y: scroll;
     }
+    p{
+    color:black;
+    }
 
     /* Hide scrollbar for Chrome, Safari and Opera */
     body::-webkit-scrollbar {
@@ -34,12 +37,6 @@ a.Export:link, a.Export:visited {
 a.Export:hover {font-size:150%; text-decoration: none; color:green;}
 
 
-
-
-
-
-
-
     </style>
 </head>
 <body>
@@ -47,7 +44,7 @@ a.Export:hover {font-size:150%; text-decoration: none; color:green;}
 
 <div class="container">
     <ol class="breadcrumb my-4">
-        <li class="breadcrumb-item active">Applicant</li>
+        <li class="breadcrumb-item active">Applicant's Report</li>
     </ol>
     <table class="table">
         <thead class="thead-dark">
@@ -90,60 +87,22 @@ a.Export:hover {font-size:150%; text-decoration: none; color:green;}
 
             </td>
 
-            <td>
-                {% for quizResult in quizResults%}
+            <td width="35%">
+                <p>{{applicant_report.0.TeamWorker_Q1}}</p>
 
+                {{applicant_report.0.TeamWorker_A1}}
+                <br><br>
+                <p>{{applicant_report.0.TeamWorker_Q2}}</p>
 
-                {%if quizResult.user_email == Applicant.Email %}
-                <!--                {%if quizResult.Teamwork_skill == 'true'%}-->
-                <!--                <p style="color:green">Team worker</p>-->
-                <!--                {%else%}-->
-                <!--                <p style="color:red">Team worker</p>-->
+                {{applicant_report.0.TeamWorker_A2}}
+                <br><br>
+                <p>{{applicant_report.0.TeamWorker_Q3}}</p>
 
-                <B style="color:black">TEAM WORK</B>
-                <br>
-
-                <b>Question 1:</b>
-                <br>
-                Describe a time when you worked well as part of a team.
-                <br>
-                <b>{{quizResult.Teamwork_Q1}}</b>
-                <br>
-                <b>Question 2:</b>
-                <br>
-                What are the advantages of teamwork?
-                <br>
-
-                <b>{{quizResult.Teamwork_Q2}}</b>
-                <br>
-                <b>Question 3:</b>
-                <br>
-                What are the soft skills that you should have to be a team worker? (e.g. X, Y, Z, etc...)
-                <br>
-
-                <b>{{quizResult.Teamwork_Q3}}</b>
-                <br>
-
-                {% for Grade in Grades%}
-                {%if Grade.0 == Applicant.Email %}
-                Score: {{Grade.4}}/4
-                {%endif%}
-                {% endfor%}
-
-                {%endif%}
-                {% endif %}
-                {%endfor%}
+                {{applicant_report.0.TeamWorker_A3}}
+                <br><br>
             </td>
             <td>
-                {% for Grade in Grades%}
-                {%if Grade.0 == Applicant.Email %}
-                {%if Grade.4 >= 3%}
-                <label style="color:green;">Teamworker</label>
-                {%else%}
-                <label style="color:red;">Teamworker</label>
-                {%endif%}
-                {%endif%}
-                {% endfor%}
+                <b>Score: </b>{{applicant_report.0.TeamWorker_Grade}}/4
             </td>
         </tr>
         {% endif %}

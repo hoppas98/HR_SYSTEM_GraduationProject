@@ -1,16 +1,13 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, Http404
-from django.contrib.auth.models import User
+from pymongo import MongoClient
+
 from Apps.models import ApplicantCV
 from Apps.models import ContactUs
 from Apps.models import PostsJobs
-from django.shortcuts import get_object_or_404
-from django.contrib.auth.decorators import login_required
-
-from pymongo import MongoClient
 
 client = MongoClient(
-    "mongodb+srv://hoppas98:hoppas98@cluster0.rr4of.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+    "mongodb+srv://hoppas98:hoppas98@cluster0.rr4of.mongodb.net/myFirstDatabase?ssl=true&ssl_cert_reqs=CERT_NONE&retryWrites=true&w=majority")
 db = client.get_database('HR_SYSTEM')
 records = db.quiz_results
 
@@ -157,47 +154,55 @@ def new_cv(request):
 
 
 def view_applicant_report(request, user_email):
-    requested_applicants = ApplicantCV.objects.all()
-    quiz_results = list(records.find())
+    Applicants = ApplicantCV.objects.all()
+    interview_results = list(records.find())
+    applicants_with_skills = []
 
-    employees_teamworker_skills = [[]]
-    for x in range(len(quiz_results)):
-        employees_teamworker_skills_Grade = 0
-        if quiz_results[x]['Teamwork_Q1'] == 'true':
-            employees_teamworker_skills_Grade += 1
-        if quiz_results[x]['Teamwork_Q2'] == 'true':
-            employees_teamworker_skills_Grade += 1
-        if quiz_results[x]['Teamwork_Q3'] == 'true':
-            employees_teamworker_skills_Grade += 2
-        employees_teamworker_skills.insert(x, (
-            [quiz_results[x]['user_email'], quiz_results[x]['Teamwork_Q1'], quiz_results[x]['Teamwork_Q2'],
-             quiz_results[x]['Teamwork_Q3'], employees_teamworker_skills_Grade]))
+    for x in range(len(interview_results)):
+        if user_email == interview_results[x]['User_Email']:
+            applicant_teamwork_skill_grade = 0
+            if interview_results[x]['TeamWorker_A1'] == 'True':
+                applicant_teamwork_skill_grade += 1
+            if interview_results[x]['TeamWorker_A2'] == 'True':
+                applicant_teamwork_skill_grade += 1
+            if interview_results[x]['TeamWorker_A3'] == 'True':
+                applicant_teamwork_skill_grade += 2
 
+            applicants_with_skills.insert(x, (
+                {'User_Email': interview_results[x]['User_Email'],
+                 'TeamWorker_Q1': interview_results[x]['TeamWorker_Q1'],
+                 'TeamWorker_Q2': interview_results[x]['TeamWorker_Q2'],
+                 'TeamWorker_Q3': interview_results[x]['TeamWorker_Q3'],
+                 'TeamWorker_A1': interview_results[x]['TeamWorker_A1'],
+                 'TeamWorker_A2': interview_results[x]['TeamWorker_A2'],
+                 'TeamWorker_A3': interview_results[x]['TeamWorker_A3'],
+                 'TeamWorker_Grade': applicant_teamwork_skill_grade}))
     return render(request, 'screens/company_side/view_report.html',
-                  {'Applicants': requested_applicants, 'quizResults': quiz_results,
-                   'Grades': employees_teamworker_skills,'user_email':user_email})
-
+                  {'Applicants': Applicants, 'user_email': user_email, 'applicant_report': applicants_with_skills})
 
 
 @login_required
 def getRequestedEmployees(request):
-    # requested_employees = get_object_or_404(ApplicantCV, Email='helmy123@miuegypt.edu.eg')
-    requested_employees = ApplicantCV.objects.all()
-    quiz_results = list(records.find())
+    # Retrieve data of interview and data of applicants
+    all_applicants = ApplicantCV.objects.all()
+    interview_results = list(records.find())
 
-    employees_teamworker_skills = [[]]
-    for x in range(len(quiz_results)):
-        employees_teamworker_skills_Grade = 0
-        if quiz_results[x]['Teamwork_Q1'] == 'true':
-            employees_teamworker_skills_Grade += 1
-        if quiz_results[x]['Teamwork_Q2'] == 'true':
-            employees_teamworker_skills_Grade += 1
-        if quiz_results[x]['Teamwork_Q3'] == 'true':
-            employees_teamworker_skills_Grade += 2
-        employees_teamworker_skills.insert(x, (
-            [quiz_results[x]['user_email'], quiz_results[x]['Teamwork_Q1'], quiz_results[x]['Teamwork_Q2'],
-             quiz_results[x]['Teamwork_Q3'], employees_teamworker_skills_Grade]))
+    applicants_with_skills = [[]]
+    for x in range(len(interview_results)):
+        applicant_teamwork_skill_grade = 0
+        if interview_results[x]['TeamWorker_A1'] == 'True':
+            applicant_teamwork_skill_grade += 1
+        if interview_results[x]['TeamWorker_A2'] == 'True':
+            applicant_teamwork_skill_grade += 1
+        if interview_results[x]['TeamWorker_A3'] == 'True':
+            applicant_teamwork_skill_grade += 2
 
+        applicants_with_skills.insert(x, (
+            [interview_results[x]['User_Email'], interview_results[x]['TeamWorker_Q1'],
+             interview_results[x]['TeamWorker_Q2'],
+             interview_results[x]['TeamWorker_Q3'], interview_results[x]['TeamWorker_A1'],
+             interview_results[x]['TeamWorker_A2'],
+             interview_results[x]['TeamWorker_A3'], applicant_teamwork_skill_grade]))
     return render(request, 'screens/company_side/results_employees.html',
-                  {'Employees': requested_employees, 'quizResults': quiz_results,
-                   'Grades': employees_teamworker_skills})
+                  {'Applicants': all_applicants, 'Interview_Results': interview_results,
+                   'Grades': applicants_with_skills})

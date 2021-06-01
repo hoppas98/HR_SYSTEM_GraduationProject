@@ -34,9 +34,6 @@ a.Export:link, a.Export:visited {
 a.Export:hover {font-size:150%; text-decoration: none; color:green;}
 
 
-
-
-
     </style>
 </head>
 <body>
@@ -60,55 +57,60 @@ a.Export:hover {font-size:150%; text-decoration: none; color:green;}
         </tr>
         </thead>
         <tbody>
-        {% for Employee in Employees%}
+        {% for Applicant in Applicants%}
 
         <tr>
             <td>
-                <h6>Name</h6> {{Employee.Name}}
+                <h6>Name</h6> {{Applicant.Name}}
                 <br><br>
-                <h6>Email</h6> <a href="/view_applicant_report/{{Employee.Email}}/">{{Employee.Email}}</a>
+                <h6>Email</h6>{{Applicant.Email}}
                 <br><br>
-                <h6>Phone</h6> {{Employee.Phone}}
+                <h6>Phone</h6> {{Applicant.Phone}}
                 <br><br>
-                <h6>Lives in</h6> {{Employee.Country}}
+                <h6>Lives in</h6> {{Applicant.Country}}
+                <br><br>
+                <h6>Street</h6> {{Applicant.Street}}
+                <br><br>
+                <h6><a href="/view_applicant_report/{{Applicant.Email}}/">Report</a></h6>
+
             </td>
             <td>
-                <h6>School Name</h6> {{Employee.School_Name}}
+                <h6>School Name</h6> {{Applicant.School_Name}}
                 <br><br>
-                <h6>University Name</h6> {{Employee.University_Name}}
+                <h6>University Name</h6> {{Applicant.University_Name}}
                 <br><br>
-                <h6>Graduation year</h6> {{Employee.Graduation_Date}}
+                <h6>Graduation year</h6> {{Applicant.Graduation_Date}}
                 <br><br>
             </td>
 
             <td>
-                <h6>Last Work</h6> {{Employee.Job_Title}} in {{Employee.Company}}
+                <h6>Last Work</h6> {{Applicant.Job_Title}} in {{Applicant.Company}}
                 <br><br>
-                <h6>From</h6>{{Employee.Start_Date_Work}}
+                <h6>From</h6>{{Applicant.Start_Date_Work}}
                 <br><br>
-                <h6>To</h6> {{Employee.End_Date_Work}}
+                <h6>To</h6> {{Applicant.End_Date_Work}}
                 <br><br>
             </td>
             <td>
                 <h6>Skills</h6>
-                {{Employee.Skills_1}}
+                {{Applicant.Skills_1}}
                 <br><br>
-                {{Employee.Skills_2}}
+                {{Applicant.Skills_2}}
                 <br><br>
-                {{Employee.Skills_3}}
+                {{Applicant.Skills_3}}
                 <br><br>
-                {{Employee.Skills_4}}
+                {{Applicant.Skills_4}}
                 <br><br>
-                {{Employee.Skills_5}}
+                {{Applicant.Skills_5}}
                 <br><br>
 
             </td>
 
             <td>
-                {% for quizResult in quizResults%}
+                {% for Interview_Result in Interview_Results%}
 
 
-                {%if quizResult.user_email == Employee.Email %}
+                {%if Interview_Result.User_Email == Applicant.Email %}
                 <!--                {%if quizResult.Teamwork_skill == 'true'%}-->
                 <!--                <p style="color:green">Team worker</p>-->
                 <!--                {%else%}-->
@@ -116,16 +118,14 @@ a.Export:hover {font-size:150%; text-decoration: none; color:green;}
 
                 <B style="color:black">TEAM WORK</B>
                 <br>
-                
-
                 {% for Grade in Grades%}
-                {%if Grade.0 == Employee.Email %}
-                {%if Grade.4 >= 3%}
-                <label style="color:green;">Teamworker</label>
-                ({{Grade.4}}/4)
+                {%if Grade.0 == Applicant.Email %}
+                {%if Grade.7 >= 3%}
+                <label style="color:green;">Team Worker</label>
+                ({{Grade.7}}/4)
                 {%else%}
-                <label style="color:red;">Teamworker</label>
-                ({{Grade.4}}/4)
+                <label style="color:red;">Team Worker</label>
+                ({{Grade.7}}/4)
                 {%endif%}
                 {%endif%}
                 {% endfor%}
@@ -133,6 +133,7 @@ a.Export:hover {font-size:150%; text-decoration: none; color:green;}
                 {%endif%}
                 {% endif %}
                 {%endfor%}
+
             </td>
 
         </tr>

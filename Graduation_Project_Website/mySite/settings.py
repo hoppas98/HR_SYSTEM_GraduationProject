@@ -106,7 +106,7 @@ DATABASES = {
         'ENGINE': 'djongo',
         'NAME': 'HR_SYSTEM',
         'CLIENT': {
-            'host': 'mongodb+srv://hoppas98:hoppas98@cluster0.rr4of.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+            'host': 'mongodb+srv://hoppas98:hoppas98@cluster0.rr4of.mongodb.net/myFirstDatabase?ssl=true&ssl_cert_reqs=CERT_NONE&retryWrites=true&w=majority',
             'username': 'hoppas98',
             'password': 'hoppas98',
         },
