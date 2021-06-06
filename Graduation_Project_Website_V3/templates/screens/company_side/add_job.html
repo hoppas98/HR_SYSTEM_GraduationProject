@@ -1,0 +1,92 @@
+{% load static%}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact us</title>
+    <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+
+</head>
+
+<style>
+.center {
+  margin: auto;
+  width:50%;
+  padding: 10px;
+}
+body {
+    overflow-y: scroll;
+    background-color:#F0F0F0
+    }
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    body::-webkit-scrollbar {
+    display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    body {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    }
+    }
+
+
+
+
+
+
+</style>
+
+<body>
+{% include 'screens/homepage_assets/navbar.html' %}
+
+{% block content %}
+<form method="post" novalidate class="center">
+    {% csrf_token %}
+
+
+    <!--Add jobs-->
+    <div style="background-color:white;padding:10%;">
+        <h3 style="text-align:center;">Add job</h3>
+        <small class="text-muted d-block" style="text-align:center;">Hire new employees.</small>
+        <div class="form-group">
+            <label for="companyname">Company Name</label>
+            <input type="text" class="form-control" id="companyname" name="companyname" placeholder="e.g. Dell Company">
+        </div>
+        <div class="form-group">
+            <label for="jobtitle">Job Title:</label>
+            <input type="text" class="form-control" id="jobtitle" name="jobtitle" placeholder="e.g. Web Developer">
+        </div>
+        <div class="form-group">
+            <label for="email">Valid Email:</label>
+            <p type="text" class="form-control">{{ user.email }}</p>
+            <input type="hidden" class="form-control" id="email" name="email" value="{{user.email}}">
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea rows="5" cols="20" class="form-control" id="description" name="description"></textarea>
+        </div>
+    </div>
+    <br>
+
+    <button onclick="submitted()" type="submit" class="btn btn-success" style="float:right;">Post</button>
+    <br>
+    <br>
+</form>
+{% include 'screens/homepage_assets/footerbar.html' %}
+{% endblock %}
+
+
+</body>
+</html>
+
+<script>
+function submitted() {
+  alert("Your job ads has been uploaded successfully");
+}
+
+
+
+
+</script>
