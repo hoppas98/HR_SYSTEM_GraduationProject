@@ -1,5 +1,8 @@
 from django.contrib.auth.decorators import login_required
+# karim
+from django.core.mail import send_mail
 from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
 from pymongo import MongoClient
 
 from Apps.models import ApplicantCV
@@ -90,6 +93,8 @@ def contact_us(request):
             Name=fullname,
             Message=message,
         )
+        template = render_to_string('screens/applicant_side/email_template.html')
+        send_mail('HRChatbotSystem', template, 'hrchatbotsystem@gmail.com', [request.user.email], fail_silently=True)
         return redirect('index')
     return render(request, 'screens/website_assets/contact_us.html')
 
@@ -333,14 +338,15 @@ def view_applicant_report(request, user_email):
                                       Communication_skill_q4[int(interview_results[x]['CS_A4'])] +
                                       Communication_skill_q5[int(interview_results[x]['CS_A5'])]) * 100) / 500
         rate = ((
-                            decision_making_score + behavioral_skill_score + team_worker_score + communication_skill_score) * 5) / 400
+                        decision_making_score + behavioral_skill_score + team_worker_score + communication_skill_score) * 5) / 400
         decision_making_score = round(decision_making_score, 2)
         behavioral_skill_score = round(behavioral_skill_score, 2)
         team_worker_score = round(team_worker_score, 2)
         print(rate)
         rate = round(rate, 1)
         scores = {'DecisionMaking': decision_making_score, 'TeamWorker': team_worker_score,
-                  'BehavioralSkill': behavioral_skill_score,'CommunicationSkill':communication_skill_score, 'Rate': rate, }
+                  'BehavioralSkill': behavioral_skill_score, 'CommunicationSkill': communication_skill_score,
+                  'Rate': rate, }
 
         applicants_with_skills.insert(x, (
             [interview_results[x]['User_Email'], scores]))

@@ -10,11 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-from pathlib import Path
 import os
+from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-import pymongo
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -47,7 +46,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.google'
+    'allauth.socialaccount.providers.google',
+    'templates',
 ]
 SITE_ID = 1
 AUTHENTICATION_BACKENDS = [
@@ -162,3 +162,14 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 
 LOGOUT_REDIRECT_URL = 'index'
 LOGIN_REDIRECT_URL = 'index'
+
+if not DEBUG:
+    EMAIL_HOST = 'smtp.gmail.com'  # internet name of the server (domain)
+    EMAIL_PORT = 587
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST_USER = 'hrchatbotsystem@gmail.com'
+    EMAIL_HOST_PASSWORD = 'Chatbot123'
+    EMAIL_USE_TLS = True
+    EMAIL_USE_SSL = False
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
