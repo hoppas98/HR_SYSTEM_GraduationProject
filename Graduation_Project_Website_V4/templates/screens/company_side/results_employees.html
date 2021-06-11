@@ -36,6 +36,9 @@ a:hover {font-size:150%; text-decoration: none; color:green;}
 
 
 
+
+
+
     </style>
 </head>
 
@@ -117,6 +120,13 @@ a:hover {font-size:150%; text-decoration: none; color:green;}
                 <center><label style="color:green;">{{applicants_with_skill.1.TeamWorker}}%</label></center>
                 {%else%}
                 <center><label style="color:red;">{{applicants_with_skill.1.TeamWorker}}%</label></center>
+                {%endif%}
+                <br>
+                <center><label style="color:black;">Communication Skill</label></center>
+                {%if applicants_with_skill.1.CommunicationSkill >= 50 %}
+                <center><label style="color:green;">{{applicants_with_skill.1.CommunicationSkill}}%</label></center>
+                {%else%}
+                <center><label style="color:red;">{{applicants_with_skill.1.CommunicationSkill}}%</label></center>
                 {%endif%}
 
                 {%endif%}

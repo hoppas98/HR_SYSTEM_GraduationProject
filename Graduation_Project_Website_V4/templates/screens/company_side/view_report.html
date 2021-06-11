@@ -1,0 +1,406 @@
+{% load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employees</title>
+    <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+    body {
+    overflow-y: scroll;
+    }
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    body::-webkit-scrollbar {
+    display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    body {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    }
+    }
+
+a.Export:link, a.Export:visited {
+
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+a.Export:hover {font-size:150%; text-decoration: none; color:green;}
+
+
+th{
+text-align: center;
+    vertical-align: middle;
+}
+
+
+.badge {
+    font-size: 25px;
+    font-weight: 200
+}
+
+.badge i {
+    font-size: 20px;
+    font-weight: 200
+}
+
+.about-rating {
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 10px
+}
+
+.total-ratings {
+    font-size: 12px
+}
+
+.bg-custom {
+    background-color: #b7dd29 !important
+}
+
+.progress {
+    margin-top: 10px
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+{% include 'screens/homepage_assets/navbar.html' %}
+
+<div class="container">
+    <ol class="breadcrumb my-4">
+        <li class="breadcrumb-item active">Employee's Report</li>
+    </ol>
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>Information</th>
+            <th>Most Common Emotions</th>
+
+            <th>Summary</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for Applicant in Applicants%}
+        {% if user_email == Applicant.Email%}
+        <tr>
+            <td>
+
+                <h6>Name</h6> {{Applicant.Name}}
+                <br><br>
+                <h6>Email</h6>{{Applicant.Email}}
+                <br><br>
+                <h6>Phone</h6> {{Applicant.Phone}}
+                <br><br>
+                <h6>Skills Mentioned</h6>
+
+                <ul style="text-align: left; float: left;">
+                    <ul style="list-style-type:none; text-align:left;">
+                        <li>{{Applicant.Skills_1}}</li>
+                        <li>{{Applicant.Skills_2}}</li>
+                        <li>{{Applicant.Skills_3}}</li>
+                        <li>{{Applicant.Skills_4}}</li>
+                        <li>{{Applicant.Skills_5}}</li>
+                    </ul>
+                </ul>
+            </td>
+
+            <td>
+                <span>HAPPY</span>
+                <div class="progress">
+                    <div class="progress-bar bg-success" role="progressbar"
+                         style="width: 25%;"
+                         aria-valuenow="20" aria-valuemin="0"
+                         aria-valuemax="100">
+                        20%
+                    </div>
+                </div>
+                <br>
+                <span>NEUTRAL</span>
+                <div class="progress">
+                    <div class="progress-bar bg-custom" role="progressbar"
+                         style="width: 30%;"
+                         aria-valuenow="25" aria-valuemin="0"
+                         aria-valuemax="100">
+                        30%
+                    </div>
+                </div>
+                <br>
+                <span>SURPRISED</span>
+                <div class="progress">
+                    <div class="progress-bar bg-primary" role="progressbar"
+                         style="width: 15%;"
+                         aria-valuenow="25" aria-valuemin="0"
+                         aria-valuemax="100">
+                        15%
+                    </div>
+                </div>
+                <br>
+                <span>SAD</span>
+                <div class="progress">
+                    <div class="progress-bar bg-warning" role="progressbar" style="width: 38%;"
+                         aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">38%
+                    </div>
+                </div>
+                <br>
+                <span>FEAR</span>
+                <div class="progress">
+                    <div class="progress-bar bg-danger" role="progressbar" style="width: 60%;"
+                         aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">60%
+                    </div>
+                </div>
+                <br>
+            </td>
+
+
+            <td>
+                {% for applicants_with_skill in applicants_with_skills%}
+                {%if applicants_with_skill.0 == Applicant.Email %}
+                <div class="container mt-5">
+                    <div class="card">
+                        <div class="row no-gutters">
+                            <div class="col-md-4 border-right">
+                                {%if applicants_with_skill.1.Rate >= 4.5 %}
+                                <div class="ratings text-center p-4 py-5"><span class="badge bg-success">{{applicants_with_skill.1.Rate}} <i
+                                        class="fa fa-star-o"></i></span>
+                                    <span class="d-block about-rating">EXCELLENT</span>
+                                    {%elif applicants_with_skill.1.Rate >= 3.5 %}
+                                    <div class="ratings text-center p-4 py-5"><span class="badge bg-success">{{applicants_with_skill.1.Rate}} <i
+                                            class="fa fa-star-o"></i></span>
+                                        <span class="d-block about-rating">VERY GOOD</span>
+                                        {%elif applicants_with_skill.1.Rate >= 2.5 %}
+                                        <div class="ratings text-center p-4 py-5"><span class="badge bg-success">{{applicants_with_skill.1.Rate}} <i
+                                                class="fa fa-star-o"></i></span>
+                                            <span class="d-block about-rating">GOOD</span>
+                                            {%elif applicants_with_skill.1.Rate >= 1.5 %}
+                                            <div class="ratings text-center p-4 py-5"><span class="badge bg-danger">{{applicants_with_skill.1.Rate}} <i
+                                                    class="fa fa-star-o"></i></span>
+                                                <span class="d-block about-danger">BAD</span>
+                                                {%else%}
+                                                <div class="ratings text-center p-4 py-5"><span
+                                                        class="badge bg-danger">{{applicants_with_skill.1.Rate}} <i
+                                                        class="fa fa-star-o"></i></span>
+                                                    <span class="d-block about-rating">VERY BAD</span>
+                                                    {%endif%}
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-8">
+                                                <div class="rating-progress-bars p-3">
+                                                    <span>DECISION MAKING</span>
+                                                    <div class="progress-1 align-items-center">
+                                                        <div class="progress">
+                                                            <div class="progress-bar bg-success" role="progressbar"
+                                                                 style="width: {{applicants_with_skill.1.DecisionMaking}}%;"
+                                                                 aria-valuenow="70" aria-valuemin="0"
+                                                                 aria-valuemax="100">
+                                                                {{applicants_with_skill.1.DecisionMaking}}%
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <span>BEHAVIORAL SKILL</span>
+                                                        <div class="progress">
+                                                            <div class="progress-bar bg-custom" role="progressbar"
+                                                                 style="width: {{applicants_with_skill.1.BehavioralSkill}}%;"
+                                                                 aria-valuenow="25" aria-valuemin="0"
+                                                                 aria-valuemax="100">
+
+                                                                {{applicants_with_skill.1.BehavioralSkill}}%
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <span>TEAM WORKER</span>
+                                                        <div class="progress">
+                                                            <div class="progress-bar bg-primary" role="progressbar"
+                                                                 style="width: {{applicants_with_skill.1.TeamWorker}}%;"
+                                                                 aria-valuenow="25" aria-valuemin="0"
+                                                                 aria-valuemax="100">
+                                                                {{applicants_with_skill.1.TeamWorker}}%
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <span>COMMUNICATION SKILL</span>
+                                                        <div class="progress">
+                                                            <div class="progress-bar bg-warning" role="progressbar"
+                                                                 style="width: {{applicants_with_skill.1.CommunicationSkill}}%;"
+                                                                 aria-valuenow="25" aria-valuemin="0"
+                                                                 aria-valuemax="100">
+                                                                {{applicants_with_skill.1.CommunicationSkill}}%
+                                                            </div>
+                                                        </div>
+                                                        <!--                                        <span>Not Defined Yet</span>-->
+                                                        <!--                                        <div class="progress">-->
+                                                        <!--                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 15%;"-->
+                                                        <!--                                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">15%-->
+                                                        <!--                                            </div>-->
+                                                        <!--                                        </div>-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                {%endif%}
+                {%endfor%}
+            </td>
+
+        </tr>
+        {%endif%}
+        {%endfor%}
+        </tbody>
+    </table>
+
+
+</div>
+</body>
+</html>
+
+
+<!--{% load static%}-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Applicant</title>-->
+<!--    <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+
+<!--    <style>-->
+<!--    body {-->
+<!--    overflow-y: scroll;-->
+<!--    }-->
+<!--    p{-->
+<!--    color:black;-->
+<!--    }-->
+
+<!--    /* Hide scrollbar for Chrome, Safari and Opera */-->
+<!--    body::-webkit-scrollbar {-->
+<!--    display: none;-->
+<!--    }-->
+
+<!--    /* Hide scrollbar for IE, Edge and Firefox */-->
+<!--    body {-->
+<!--    -ms-overflow-style: none; /* IE and Edge */-->
+<!--    scrollbar-width: none; /* Firefox */-->
+<!--    }-->
+<!--    }-->
+
+<!--a.Export:link, a.Export:visited {-->
+
+<!--  color: black;-->
+<!--  padding: 10px 20px;-->
+<!--  text-align: center;-->
+<!--  text-decoration: none;-->
+<!--  display: inline-block;-->
+<!--}-->
+<!--a.Export:hover {font-size:150%; text-decoration: none; color:green;}-->
+
+
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<div class="container">-->
+<!--    <ol class="breadcrumb my-4">-->
+<!--        <li class="breadcrumb-item active">Applicant's Report</li>-->
+<!--    </ol>-->
+<!--    <table class="table">-->
+<!--        <thead class="thead-dark">-->
+<!--        <tr>-->
+<!--            <th>Personal Info.</th>-->
+<!--            <th>Skills Mentioned</th>-->
+<!--            <th>Interview Result</th>-->
+<!--            <th>Skills Report</th>-->
+<!--            <th>Facial Emotions Report</th>-->
+
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        {% for Applicant in Applicants%}-->
+<!--        {% if user_email == Applicant.Email%}-->
+<!--        <tr>-->
+<!--            <td>-->
+<!--                <h6>Name</h6> {{Applicant.Name}}-->
+<!--                <br><br>-->
+<!--                <h6>Email</h6> {{Applicant.Email}}-->
+<!--                <br><br>-->
+<!--                <h6>Phone</h6> {{Applicant.Phone}}-->
+<!--                <br><br>-->
+<!--                <h6>Lives in</h6> {{Applicant.Country}}-->
+<!--            </td>-->
+
+
+<!--            <td>-->
+<!--                <h6>Skills</h6>-->
+<!--                {{Applicant.Skills_1}}-->
+<!--                <br><br>-->
+<!--                {{Applicant.Skills_2}}-->
+<!--                <br><br>-->
+<!--                {{Applicant.Skills_3}}-->
+<!--                <br><br>-->
+<!--                {{Applicant.Skills_4}}-->
+<!--                <br><br>-->
+<!--                {{Applicant.Skills_5}}-->
+<!--                <br><br>-->
+
+<!--            </td>-->
+
+<!--            <td width="35%">-->
+<!--                <p>{{applicant_report.0.TeamWorker_Q1}}</p>-->
+
+<!--                {{applicant_report.0.TeamWorker_A1}}-->
+<!--                <br><br>-->
+<!--                <p>{{applicant_report.0.TeamWorker_Q2}}</p>-->
+
+<!--                {{applicant_report.0.TeamWorker_A2}}-->
+<!--                <br><br>-->
+<!--                <p>{{applicant_report.0.TeamWorker_Q3}}</p>-->
+
+<!--                {{applicant_report.0.TeamWorker_A3}}-->
+<!--                <br><br>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--                <b>Score: </b>{{applicant_report.0.TeamWorker_Grade}}/4-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        {% endif %}-->
+<!--        {%endfor%}-->
+<!--        </tbody>-->
+<!--    </table>-->
+
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

@@ -198,10 +198,16 @@ def get_requested_employees(request):
     behavioral_skill_q4 = [0, 25, 50, 75, 100]
     behavioral_skill_q5 = [0, 25, 50, 75, 100]
 
+    Communication_skill_q1 = [0, 25, 50, 75, 100]
+    Communication_skill_q2 = [0, 25, 50, 75, 100]
+    Communication_skill_q3 = [0, 25, 50, 75, 100]
+    Communication_skill_q4 = [0, 25, 50, 75, 100]
+    Communication_skill_q5 = [0, 25, 50, 75, 100]
+
     for x in range(len(interview_results)):
         # Decision Making Skill
         float
-        decision_making_score = 0
+        decision_making_score = 25
 
         # Team Work Skill
         float
@@ -209,11 +215,15 @@ def get_requested_employees(request):
 
         # Behavioral Skill
         float
-        behavioral_skill_score = 0
+        behavioral_skill_score = 25
+
+        # Communication Skill
+        float
+        communication_skill_score = 25
 
         # Total Rate
         float
-        total_rate = 1300
+        total_rate = 1800
 
         float
         rate = 25
@@ -230,13 +240,22 @@ def get_requested_employees(request):
                                    behavioral_skill_q3[int(interview_results[x]['BS_A3'])] +
                                    behavioral_skill_q4[int(interview_results[x]['BS_A4'])] +
                                    behavioral_skill_q5[int(interview_results[x]['BS_A5'])]) * 100) / 500
+        communication_skill_score = ((Communication_skill_q1[int(interview_results[x]['CS_A1'])] +
+                                      Communication_skill_q2[int(interview_results[x]['CS_A2'])] +
+                                      Communication_skill_q3[int(interview_results[x]['CS_A3'])] +
+                                      Communication_skill_q4[int(interview_results[x]['CS_A4'])] +
+                                      Communication_skill_q5[int(interview_results[x]['CS_A5'])]) * 100) / 500
+
         decision_making_score = round(decision_making_score, 2)
         behavioral_skill_score = round(behavioral_skill_score, 2)
         team_worker_score = round(team_worker_score, 2)
-        total_rate = (decision_making_score + behavioral_skill_score + team_worker_score) * 100 / total_rate
+        communication_skill_score = round(communication_skill_score, 2)
+
+        total_rate = (
+                             decision_making_score + behavioral_skill_score + team_worker_score + communication_skill_score) * 100 / total_rate
 
         scores = {'DecisionMaking': decision_making_score, 'TeamWorker': team_worker_score,
-                  'BehavioralSkill': behavioral_skill_score}
+                  'BehavioralSkill': behavioral_skill_score, 'CommunicationSkill': communication_skill_score}
 
         applicants_with_skills.insert(x, (
             [interview_results[x]['User_Email'], scores]))
@@ -266,10 +285,16 @@ def view_applicant_report(request, user_email):
     behavioral_skill_q4 = [0, 25, 50, 75, 100]
     behavioral_skill_q5 = [0, 25, 50, 75, 100]
 
+    Communication_skill_q1 = [0, 25, 50, 75, 100]
+    Communication_skill_q2 = [0, 25, 50, 75, 100]
+    Communication_skill_q3 = [0, 25, 50, 75, 100]
+    Communication_skill_q4 = [0, 25, 50, 75, 100]
+    Communication_skill_q5 = [0, 25, 50, 75, 100]
+
     for x in range(len(interview_results)):
         # Decision Making Skill
         float
-        decision_making_score = 0
+        decision_making_score = 25
 
         # Team Work Skill
         float
@@ -277,11 +302,15 @@ def view_applicant_report(request, user_email):
 
         # Behavioral Skill
         float
-        behavioral_skill_score = 0
+        behavioral_skill_score = 25
+
+        # Communication Skill
+        float
+        communication_skill_score = 25
 
         # Total Rate
         float
-        total_rate = 1300
+        total_rate = 1800
 
         float
         rate = 25
@@ -298,14 +327,20 @@ def view_applicant_report(request, user_email):
                                    behavioral_skill_q3[int(interview_results[x]['BS_A3'])] +
                                    behavioral_skill_q4[int(interview_results[x]['BS_A4'])] +
                                    behavioral_skill_q5[int(interview_results[x]['BS_A5'])]) * 100) / 500
-        rate = ((decision_making_score + behavioral_skill_score + team_worker_score) * 5) / 300
+        communication_skill_score = ((Communication_skill_q1[int(interview_results[x]['CS_A1'])] +
+                                      Communication_skill_q2[int(interview_results[x]['CS_A2'])] +
+                                      Communication_skill_q3[int(interview_results[x]['CS_A3'])] +
+                                      Communication_skill_q4[int(interview_results[x]['CS_A4'])] +
+                                      Communication_skill_q5[int(interview_results[x]['CS_A5'])]) * 100) / 500
+        rate = ((
+                            decision_making_score + behavioral_skill_score + team_worker_score + communication_skill_score) * 5) / 400
         decision_making_score = round(decision_making_score, 2)
         behavioral_skill_score = round(behavioral_skill_score, 2)
         team_worker_score = round(team_worker_score, 2)
         print(rate)
         rate = round(rate, 1)
         scores = {'DecisionMaking': decision_making_score, 'TeamWorker': team_worker_score,
-                  'BehavioralSkill': behavioral_skill_score, 'Rate': rate, }
+                  'BehavioralSkill': behavioral_skill_score,'CommunicationSkill':communication_skill_score, 'Rate': rate, }
 
         applicants_with_skills.insert(x, (
             [interview_results[x]['User_Email'], scores]))

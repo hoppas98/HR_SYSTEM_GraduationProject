@@ -34,14 +34,39 @@ a.Export:link, a.Export:visited {
 a.Export:hover {font-size:150%; text-decoration: none; color:green;}
 
 
+th{
+text-align: center;
+    vertical-align: middle;
+}
 
 
+.badge {
+    font-size: 25px;
+    font-weight: 200
+}
 
+.badge i {
+    font-size: 20px;
+    font-weight: 200
+}
 
+.about-rating {
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 10px
+}
 
+.total-ratings {
+    font-size: 12px
+}
 
+.bg-custom {
+    background-color: #b7dd29 !important
+}
 
-
+.progress {
+    margin-top: 10px
+}
 
     </style>
 </head>
@@ -56,10 +81,8 @@ a.Export:hover {font-size:150%; text-decoration: none; color:green;}
     <table class="table">
         <thead class="thead-dark">
         <tr>
-            <th>Personal Info.</th>
-            <th>Skills Mentioned</th>
-            <th>Interview Review</th>
-            <th>Emotions Extracted</th>
+            <th>Information</th>
+
             <th>Summary</th>
 
         </tr>
@@ -76,74 +99,78 @@ a.Export:hover {font-size:150%; text-decoration: none; color:green;}
                 <br><br>
                 <h6>Phone</h6> {{Applicant.Phone}}
                 <br><br>
-                <h6>Lives in</h6> {{Applicant.Country}}
-                <br><br>
-                <h6>Street</h6> {{Applicant.Street}}
-                <br><br>
-                <h6>School Name</h6> {{Applicant.School_Name}}
-                <br><br>
-                <h6>University Name</h6> {{Applicant.University_Name}}
-                <br><br>
-                <h6>Graduation year</h6> {{Applicant.Graduation_Date}}
-                <br><br>
-            </td>
+                <h6>Skills Mentioned</h6>
 
-            <td>
-                <h6>Skills</h6>
-                {{Applicant.Skills_1}}
-                <br><br>
-                {{Applicant.Skills_2}}
-                <br><br>
-                {{Applicant.Skills_3}}
-                <br><br>
-                {{Applicant.Skills_4}}
-                <br><br>
-                {{Applicant.Skills_5}}
-                <br><br>
-
+                <ul style="text-align: left; float: left;">
+                    <li>{{Applicant.Skills_1}}</li>
+                    <li>{{Applicant.Skills_2}}</li>
+                    <li>{{Applicant.Skills_3}}</li>
+                    <li>{{Applicant.Skills_4}}</li>
+                    <li>{{Applicant.Skills_5}}</li>
+                </ul>
             </td>
 
             <td>
                 {% for applicants_with_skill in applicants_with_skills%}
                 {%if applicants_with_skill.0 == Applicant.Email %}
-                <center><label style="color:green;">Decision Making</label></center>
-                <br>
-                <center>{{applicants_with_skill.1.DecisionMaking}}%</center>
-                <br>
-                <center><label style="color:green;">Team Worker</label></center>
-                <br>
-                <center>{{applicants_with_skill.1.TeamWorker}}%</center>
-                <br>
+                <div class="container mt-5">
+                    <div class="card">
+                        <div class="row no-gutters">
+                            <div class="col-md-4 border-right">
+                                <div class="ratings text-center p-4 py-5"><span class="badge bg-success">{{applicants_with_skill.1.Rate}} <i
+                                        class="fa fa-star-o"></i></span> <span
+                                        class="d-block about-rating">VERY GOOD</span></div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="rating-progress-bars p-3">
+                                    <span>Decision Making</span>
+                                    <div class="progress-1 align-items-center">
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success" role="progressbar"
+                                                 style="width: {{applicants_with_skill.1.DecisionMaking}}%;"
+                                                 aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+                                                {{applicants_with_skill.1.DecisionMaking}}%
+                                            </div>
+                                        </div>
+                                        <span>Behavioral Skill</span>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-custom" role="progressbar"
+                                                 style="width: {{applicants_with_skill.1.BehavioralSkill}}%;"
+                                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+
+                                                {{applicants_with_skill.1.BehavioralSkill}}%
+                                            </div>
+                                        </div>
+                                        <span>Team Work Skill</span>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-primary" role="progressbar"
+                                                 style="width: {{applicants_with_skill.1.TeamWorker}}%;"
+                                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                                {{applicants_with_skill.1.TeamWorker}}%
+                                            </div>
+                                        </div>
+                                        <!--                                        <span>Not Defined Yet</span>-->
+                                        <!--                                        <div class="progress">-->
+                                        <!--                                            <div class="progress-bar bg-warning" role="progressbar" style="width: 30%;"-->
+                                        <!--                                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">30%-->
+                                        <!--                                            </div>-->
+                                        <!--                                        </div>-->
+                                        <!--                                        <span>Not Defined Yet</span>-->
+                                        <!--                                        <div class="progress">-->
+                                        <!--                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 15%;"-->
+                                        <!--                                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">15%-->
+                                        <!--                                            </div>-->
+                                        <!--                                        </div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 {%endif%}
                 {%endfor%}
             </td>
-            <!--                {% for Interview_Result in Interview_Results%}-->
-
-
-            <!--                {%if Interview_Result.User_Email == Applicant.Email %}-->
-            <!--                &lt;!&ndash;                {%if quizResult.Teamwork_skill == 'true'%}&ndash;&gt;-->
-            <!--                &lt;!&ndash;                <p style="color:green">Team worker</p>&ndash;&gt;-->
-            <!--                &lt;!&ndash;                {%else%}&ndash;&gt;-->
-            <!--                &lt;!&ndash;                <p style="color:red">Team worker</p>&ndash;&gt;-->
-
-            <!--                <B style="color:black">TEAM WORK</B>-->
-            <!--                <br>-->
-            <!--                {% for Grade in Grades%}-->
-            <!--                {%if Grade.0 == Applicant.Email %}-->
-            <!--                {%if Grade.7 >= 3%}-->
-            <!--                <label style="color:green;">Team Worker</label>-->
-            <!--                ({{Grade.7}}/4)-->
-            <!--                {%else%}-->
-            <!--                <label style="color:red;">Team Worker</label>-->
-            <!--                ({{Grade.7}}/4)-->
-            <!--                {%endif%}-->
-            <!--                {%endif%}-->
-            <!--                {% endfor%}-->
-
-            <!--                {%endif%}-->
-            <!--                {% endif %}-->
-            <!--                {%endfor%}-->
-
 
         </tr>
         {%endif%}
